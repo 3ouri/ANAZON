@@ -5,10 +5,24 @@
  */
 package com.anazon.dao;
 
+import com.anazon.model.Product;
+import java.util.List;
+
 /**
  *
  * @author Abdallah
  */
-public class ProductDAO {
-    
+public interface ProductDAO {
+
+    public List<Product> getAll();
+
+    public Product add(Product product);
+
+    public Product get(long id);
+
+    public Product update(Product product);
+
+    public Product delete(Product product);
+
+    public void deleteAll(List<Product> selectedProducts);
 }

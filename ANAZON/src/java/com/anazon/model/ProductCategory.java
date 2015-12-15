@@ -17,8 +17,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -26,9 +24,11 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "product_category")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "ProductCategory.findAll", query = "SELECT p FROM ProductCategory p")})
+    @NamedQuery(name = "ProductCategory.findAll", query = "SELECT p FROM ProductCategory p"),
+    @NamedQuery(name = "ProductCategory.findById", query = "SELECT p FROM ProductCategory p WHERE p.id = :id"),
+    @NamedQuery(name = "ProductCategory.findByTitle", query = "SELECT p FROM ProductCategory p WHERE p.title = :title"),
+    @NamedQuery(name = "ProductCategory.findByDescription", query = "SELECT p FROM ProductCategory p WHERE p.description = :description")})
 public class ProductCategory implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -77,7 +77,6 @@ public class ProductCategory implements Serializable {
         this.description = description;
     }
 
-    @XmlTransient
     public List<Product> getProductList() {
         return productList;
     }
@@ -108,7 +107,7 @@ public class ProductCategory implements Serializable {
 
     @Override
     public String toString() {
-        return "com.anazon.controller.ProductCategory[ id=" + id + " ]";
+        return "com.anazon.model.ProductCategory[ id=" + id + " ]";
     }
     
 }

@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Registration System</title>
+
+    </h:head>
+
+    <h:body>
+        <h:form id="mainIdForm">
+            <p:layout fullPage="true">
+
+                <ui:include src="header.xhtml" />
+                <ui:include src="menu.xhtml" />
+
+                <p:layoutUnit position="center" resizable="false"
+                              header="#{productController.addOperation == false ? 'Edit Product' : 'Add Product'}">
+
+                    <h:panelGrid columns="1" cellpadding="5">
+                        <h:outputLabel value="Name" />
+                        <p:inputText id="name" required="true" label="name"
+                                     requiredMessage="Name Required"
+                                     value="#{productController.product.name}" />
+                        <h:outputLabel value="Qunitity" />
+                        <p:inputText id="qunitity" required="true" label="qunitity"
+                                     requiredMessage="Qunitity Required"
+                                     value="#{productController.product.qunitity}" />
+                        <h:outputLabel value="Price" />
+                        <p:inputText id="price" required="true" label="price"
+                                     requiredMessage="Price Required"
+                                     value="#{productController.product.price}" />
+                        <h:outputLabel value="Category" />
+                        <p:selectOneMenu styleClass="selectOneMenuWidth"
+                                         value="#{productController.selectedProductCategoryId}" required="true"
+                                         requiredMessage="Please select one" id="category">
+                            <f:selectItem itemLabel="Select one" itemValue="-1" />
+                            <f:selectItems value="#{productController.productCategoryListAsSelectItem}"></f:selectItems>
+                        </p:selectOneMenu>
+                        <h:outputLabel value="Description" />
+                        <p:inputText id="description" required="false" label="description"
+                                     requiredMessage="Description Required"
+                                     value="#{productController.product.descrption}" />
+                        <p:commandButton value="Save" ajax="false"
+                                         action="#{productController.applyAddEdit}" />
+                    </h:panelGrid>
+
+                </p:layoutUnit>
+
+            </p:layout>
+        </h:form>
+    </h:body>
+</html>

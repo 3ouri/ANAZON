@@ -10,6 +10,7 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
@@ -20,8 +21,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -29,13 +28,22 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "product")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p")})
+    @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p"),
+    @NamedQuery(name = "Product.findById", query = "SELECT p FROM Product p WHERE p.id = :id"),
+    @NamedQuery(name = "Product.findByName", query = "SELECT p FROM Product p WHERE p.name = :name"),
+    @NamedQuery(name = "Product.findByDescrption", query = "SELECT p FROM Product p WHERE p.descrption = :descrption"),
+    @NamedQuery(name = "Product.findByQunitity", query = "SELECT p FROM Product p WHERE p.qunitity = :qunitity"),
+    @NamedQuery(name = "Product.findByPrice", query = "SELECT p FROM Product p WHERE p.price = :price")})
 public class Product implements Serializable {
+
+    @Lob
+    @Column(name = "image")
+    private byte[] image;
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue
     @Basic(optional = false)
     @NotNull
     @Column(name = "id")
@@ -48,9 +56,6 @@ public class Product implements Serializable {
     private String descrption;
     @Column(name = "qunitity")
     private Integer qunitity;
-    @Lob
-    @Column(name = "image")
-    private byte[] image;
     @Column(name = "price")
     private Integer price;
     @JoinColumn(name = "category_id", referencedColumnName = "id")
@@ -98,14 +103,6 @@ public class Product implements Serializable {
         this.qunitity = qunitity;
     }
 
-    public byte[] getImage() {
-        return image;
-    }
-
-    public void setImage(byte[] image) {
-        this.image = image;
-    }
-
     public Integer getPrice() {
         return price;
     }
@@ -122,7 +119,6 @@ public class Product implements Serializable {
         this.categoryId = categoryId;
     }
 
-    @XmlTransient
     public List<Orders> getOrdersList() {
         return ordersList;
     }
@@ -153,7 +149,15 @@ public class Product implements Serializable {
 
     @Override
     public String toString() {
-        return "com.anazon.controller.Product[ id=" + id + " ]";
+        return "com.anazon.model.Product[ id=" + id + " ]";
     }
-    
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
 }

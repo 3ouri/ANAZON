@@ -17,8 +17,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -26,9 +24,10 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "user_role")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "UserRole.findAll", query = "SELECT u FROM UserRole u")})
+    @NamedQuery(name = "UserRole.findAll", query = "SELECT u FROM UserRole u"),
+    @NamedQuery(name = "UserRole.findById", query = "SELECT u FROM UserRole u WHERE u.id = :id"),
+    @NamedQuery(name = "UserRole.findByRoleType", query = "SELECT u FROM UserRole u WHERE u.roleType = :roleType")})
 public class UserRole implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -66,7 +65,6 @@ public class UserRole implements Serializable {
         this.roleType = roleType;
     }
 
-    @XmlTransient
     public List<User> getUserList() {
         return userList;
     }
@@ -97,7 +95,7 @@ public class UserRole implements Serializable {
 
     @Override
     public String toString() {
-        return "com.anazon.controller.UserRole[ id=" + id + " ]";
+        return "com.anazon.model.UserRole[ id=" + id + " ]";
     }
     
 }

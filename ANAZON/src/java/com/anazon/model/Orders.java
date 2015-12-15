@@ -19,17 +19,19 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author Abdallah
  */
 @Entity
-@Table(name = "order")
-@XmlRootElement
+@Table(name = "order") 
 @NamedQueries({
-    @NamedQuery(name = "Orders.findAll", query = "SELECT o FROM Orders o")})
+    @NamedQuery(name = "Orders.findAll", query = "SELECT o FROM Orders o"),
+    @NamedQuery(name = "Orders.findById", query = "SELECT o FROM Orders o WHERE o.id = :id"),
+    @NamedQuery(name = "Orders.findByQuantity", query = "SELECT o FROM Orders o WHERE o.quantity = :quantity"),
+    @NamedQuery(name = "Orders.findByDate", query = "SELECT o FROM Orders o WHERE o.date = :date"),
+    @NamedQuery(name = "Orders.findByTotalPrice", query = "SELECT o FROM Orders o WHERE o.totalPrice = :totalPrice")})
 public class Orders implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -129,7 +131,7 @@ public class Orders implements Serializable {
 
     @Override
     public String toString() {
-        return "com.anazon.controller.Orders[ id=" + id + " ]";
+        return "com.anazon.model.Orders[ id=" + id + " ]";
     }
     
 }

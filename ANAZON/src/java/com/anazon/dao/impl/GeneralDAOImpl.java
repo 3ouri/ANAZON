@@ -1,4 +1,4 @@
-package com.anazon.dao;
+package com.anazon.dao.impl;
 
 import com.anazon.common.ConfigurationConstants.SortingType;
 import java.util.Collection;
@@ -10,21 +10,21 @@ import org.eclipse.persistence.queries.ReadAllQuery;
 import org.eclipse.persistence.queries.SQLCall;
 import org.eclipse.persistence.sessions.UnitOfWork;
 
-public class GeneralDAO {
+public class GeneralDAOImpl {
 
-    private static GeneralDAO generalDAO;
+    private static GeneralDAOImpl generalDAO;
     private static final String persistenceUnitName = "DataLayer";
     private static EntityManagerFactory factory;
     private JpaEntityManager em;
     private UnitOfWork uow;
 
-    private GeneralDAO() {
+    private GeneralDAOImpl() {
         factory = Persistence.createEntityManagerFactory(persistenceUnitName);
     }
 
-    public static GeneralDAO getInstance() {
+    public static GeneralDAOImpl getInstance() {
         if (generalDAO == null) {
-            return new GeneralDAO();
+            return new GeneralDAOImpl();
         }
         return generalDAO;
     }
