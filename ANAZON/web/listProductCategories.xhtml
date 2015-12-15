@@ -23,38 +23,38 @@
                     <p:layoutUnit position="center" resizable="false">
 
                         <p:messages showDetail="true" autoUpdate="true" id="message" />
-                        <p:dataTable var="product" value="#{productController.productsList}" id="productDataTable"
-                                     rowKey="#{product.id}" paginator="true" rows="8"
+                        <p:dataTable var="productCategory" value="#{productCategoryController.productCategoriesList}" id="productCategoryDataTable"
+                                     rowKey="#{productCategory.id}" paginator="true" rows="8"
                                      emptyMessage="No data found" lazy="false"
-                                     widgetVar="productsTable" paginatorPosition="bottom"
+                                     widgetVar="productCategoryTable" paginatorPosition="bottom"
                                      paginatorAlwaysVisible="false"
-                                     selection="#{productController.selectedProducts}">
+                                     selection="#{productCategoryController.selectedProductCategories}">
                             <f:facet name="header">  
-                                Products  
+                                Product Categories  
                             </f:facet>
                             <p:column selectionMode="multiple" />
-                            <p:column filterBy="#{product.name}" headerText="Product Name"
+                            <p:column filterBy="#{productCategory.title}" headerText="Title"
                                       filterMatchMode="contains">
-                                <p:commandLink value="#{product.name}" ajax="false"
-                                               action="#{productController.goToAddEdit()}">
-                                    <f:setPropertyActionListener target="#{productController.product}"
-                                                                 value="#{product}" />
-                                    <f:setPropertyActionListener target="#{productController.addOperation}"
+                                <p:commandLink value="#{productCategory.title}" ajax="false"
+                                               action="#{productCategoryController.goToAddEdit()}">
+                                    <f:setPropertyActionListener target="#{productCategoryController.productCategory}"
+                                                                 value="#{productCategory}" />
+                                    <f:setPropertyActionListener target="#{productCategoryController.addOperation}"
                                                                  value="false" />
                                 </p:commandLink>
                             </p:column>
 
-                            <p:column filterBy="#{product.categoryId.title}"
-                                      headerText="Product Category" filterMatchMode="contains">
-                                <h:outputText value="#{product.categoryId.title}" />
+                            <p:column filterBy="#{productCategory.description}"
+                                      headerText="Description" filterMatchMode="contains">
+                                <h:outputText value="#{productCategory.description}" />
                             </p:column>
 
                         </p:dataTable>
                         <div style="text-align: center;">
                             <p:commandButton
-                                value="Add New" action="#{productController.goToAddEdit()}"
+                                value="Add New" action="#{productCategoryController.goToAddEdit()}"
                                 ajax="false">
-                                <f:setPropertyActionListener target="#{productController.addOperation}"
+                                <f:setPropertyActionListener target="#{productCategoryController.addOperation}"
                                                              value="true" />
                             </p:commandButton>
 
@@ -73,7 +73,7 @@
                     <p:commandButton value="No" onclick="PF('confirmation').hide()"
                                      style="float:right;" type="button" />
                     <p:commandButton value="Yes" style="float:right;"
-                                     actionListener="#{productController.delete()}" update="message productDataTable"
+                                     actionListener="#{productCategoryController.delete()}" update="message productCategoryDataTable"
                                      oncomplete="PF('confirmation').hide()" />
                 </p:confirmDialog>
 

@@ -6,7 +6,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Registration System</title>
+        <title>ANAZON</title>
 
     </h:head>
 
@@ -45,8 +45,10 @@
                                      requiredMessage="Description Required"
                                      value="#{productController.product.descrption}" />
                         <p:commandButton value="Save" ajax="false"
-                                         action="#{productController.applyAddEdit}" />
+                                         action="#{productController.applyAddEdit}" update="mainIdForm" />
                     </h:panelGrid>
+                    
+                    <p:messages />
 
                 </p:layoutUnit>
 

@@ -53,13 +53,17 @@ public class ProductController implements Serializable {
     }
 
     public String applyAddEdit() {
+        FacesMessage message;
         if (addOperation) {
             ProductCategory productCategory = productCategoryService.get(selectedProductCategoryId);
             product.setCategoryId(productCategory);
             productService.add(product);
+            message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Operation Done Successfully", "Product \"" + product.getName() + "\" is added.");
         } else {
             productService.update(product);
+            message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Operation Done Successfully", "Product \"" + product.getName() + "\" is updated.");
         }
+        FacesContext.getCurrentInstance().addMessage(null, message);
         return goToProducts();
     }
 

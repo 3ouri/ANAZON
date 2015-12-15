@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>ANAZON</title>
+
+    </h:head>
+
+    <h:body>
+        <h:form id="mainIdForm">
+            <p:layout fullPage="true">
+
+                <ui:include src="header.xhtml" />
+                <ui:include src="menu.xhtml" />
+
+                <p:layoutUnit position="center" resizable="false"
+                              header="#{productCategoryController.addOperation == false ? 'Edit Product Category' : 'Add Product Category'}">
+
+                    <h:panelGrid columns="1" cellpadding="5">
+                        <h:outputLabel value="Title" />
+                        <p:inputText id="title" required="true" label="title"
+                                     requiredMessage="Title Required"
+                                     value="#{productCategoryController.productCategory.title}" />
+                        <h:outputLabel value="Description" />
+                        <p:inputText id="description" required="false" label="description"
+                                     requiredMessage="Description Required"
+                                     value="#{productCategoryController.productCategory.description}" />
+                        <p:commandButton value="Save" ajax="false"
+                                         action="#{productCategoryController.applyAddEdit}" update="mainIdForm" />
+                    </h:panelGrid>
+
+                    <p:messages />
+
+                </p:layoutUnit>
+
+            </p:layout>
+        </h:form>
+    </h:body>
+</html>

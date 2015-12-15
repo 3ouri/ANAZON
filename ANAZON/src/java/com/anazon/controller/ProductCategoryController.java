@@ -43,25 +43,62 @@ public class ProductCategoryController implements Serializable {
     }
 
     public String applyAddEdit() {
+        FacesMessage message;
         if (addOperation) {
             productCategoryService.add(productCategory);
+            message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Operation Done Successfully", "Product Category \"" + productCategory.getTitle() + "\" is added.");
         } else {
             productCategoryService.update(productCategory);
+            message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Operation Done Successfully", "Product Category \"" + productCategory.getTitle() + "\" is updated.");
         }
-        return goToProducts();
+
+        FacesContext.getCurrentInstance().addMessage(null, message);
+        return goToProductCategories();
     }
 
     public String delete() {
         productCategoryService.deleteAll(selectedProductCategories);
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Operation Success", "Selected products were deleted.");
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Operation Done Successfully", "Selected product categories were deleted.");
         FacesContext.getCurrentInstance().addMessage(null, message);
-        return goToProducts();
+        return goToProductCategories();
     }
 
-    public String goToProducts() {
+    public String goToProductCategories() {
         searchAll();
         productCategory = new ProductCategory();
         return "listProductCategories?faces-redirect=true";
+    }
+
+    public ProductCategory getProductCategory() {
+        return productCategory;
+    }
+
+    public void setProductCategory(ProductCategory productCategory) {
+        this.productCategory = productCategory;
+    }
+
+    public List<ProductCategory> getProductCategoriesList() {
+        return productCategoriesList;
+    }
+
+    public void setProductCategoriesList(List<ProductCategory> productCategoriesList) {
+        this.productCategoriesList = productCategoriesList;
+    }
+
+    public List<ProductCategory> getSelectedProductCategories() {
+        return selectedProductCategories;
+    }
+
+    public void setSelectedProductCategories(List<ProductCategory> selectedProductCategories) {
+        this.selectedProductCategories = selectedProductCategories;
+    }
+
+    public boolean isAddOperation() {
+        return addOperation;
+    }
+
+    public void setAddOperation(boolean addOperation) {
+        this.addOperation = addOperation;
     }
 
 }
