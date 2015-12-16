@@ -8,7 +8,6 @@ package com.anazon.dao.impl;
 import com.anazon.dao.OrderDAO;
 import com.anazon.model.Orders;
 import java.util.List;
-import javax.persistence.criteria.Order;
 import org.eclipse.persistence.expressions.Expression;
 import org.eclipse.persistence.expressions.ExpressionBuilder;
 
@@ -26,7 +25,7 @@ public class OrderDAOImpl implements OrderDAO {
 
     @Override
     public List<Orders> getAll() {
-        return generalDAOImpl.getAllObjects(Order.class);
+        return generalDAOImpl.getAllObjects(Orders.class);
     }
 
     @Override
@@ -37,7 +36,7 @@ public class OrderDAOImpl implements OrderDAO {
     @Override
     public Orders get(long id) {
         Expression expression = new ExpressionBuilder().get("id").equal(id);
-        return generalDAOImpl.getObjectByExpression(Order.class, expression);
+        return generalDAOImpl.getObjectByExpression(Orders.class, expression);
     }
 
     @Override
@@ -53,6 +52,18 @@ public class OrderDAOImpl implements OrderDAO {
     @Override
     public void deleteAll(List<Orders> selectedOrders) {
         generalDAOImpl.deleteAllObjects(selectedOrders);
+    }
+
+    @Override
+    public List<Orders> getAllByCustomerId(String customerId) {
+        Expression expression = new ExpressionBuilder().get("customreId").get("id").equal(customerId);
+        return generalDAOImpl.getAllObjectsByExpression(Orders.class, expression);
+    }
+
+    @Override
+    public List<Orders> getAllByProductId(String productId) {
+        Expression expression = new ExpressionBuilder().get("productId").get("id").equal(productId);
+        return generalDAOImpl.getAllObjectsByExpression(Orders.class, expression);
     }
 
 }

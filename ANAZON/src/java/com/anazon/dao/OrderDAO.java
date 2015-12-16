@@ -25,4 +25,8 @@ public interface OrderDAO {
     public Orders delete(Orders order);
 
     public void deleteAll(List<Orders> selectedOrders);
+
+    public List<Orders> getAllByCustomerId(String customerId);
+
+    public List<Orders> getAllByProductId(String productId);
 }

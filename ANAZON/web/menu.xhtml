@@ -13,24 +13,21 @@
             </p:menuitem>
 
             <p:menuitem>
-                <p:commandLink action="#{productController.goToProducts}"
-                               ajax="false" value="Products">
+                <p:commandLink action="#{productController.goToProducts}" value="Products">
                     <f:setPropertyActionListener target="#{productController}"
                                                  value="#{null}" />
                 </p:commandLink>
             </p:menuitem>
 
             <p:menuitem>
-                <p:commandLink action="#{productCategoryController.goToProductCategories()}"
-                               ajax="false" value="Product Categories">
+                <p:commandLink action="#{productCategoryController.goToProductCategories()}" value="Product Categories">
                     <f:setPropertyActionListener target="#{productCategoryController}"
                                                  value="#{null}" />
                 </p:commandLink>
             </p:menuitem>
 
             <p:menuitem>
-                <p:commandLink action="#{orderController.goToOrders()}"
-                               ajax="false" value="Orders">
+                <p:commandLink action="#{orderController.goToOrders()}" value="Orders">
                     <f:setPropertyActionListener target="#{orderController}"
                                                  value="#{null}" />
                 </p:commandLink>

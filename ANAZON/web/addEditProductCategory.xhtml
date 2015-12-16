@@ -29,8 +29,7 @@
                         <p:inputText id="description" required="false" label="description"
                                      requiredMessage="Description Required"
                                      value="#{productCategoryController.productCategory.description}" />
-                        <p:commandButton value="Save" ajax="false"
-                                         action="#{productCategoryController.applyAddEdit}" update="mainIdForm" />
+                        <p:commandButton value="Save" action="#{productCategoryController.applyAddEdit}" update="mainIdForm" />
                     </h:panelGrid>
 
                     <p:messages />

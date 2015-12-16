@@ -35,8 +35,7 @@
                             <p:column selectionMode="multiple" />
                             <p:column filterBy="#{productCategory.title}" headerText="Title"
                                       filterMatchMode="contains">
-                                <p:commandLink value="#{productCategory.title}" ajax="false"
-                                               action="#{productCategoryController.goToAddEdit()}">
+                                <p:commandLink value="#{productCategory.title}" action="#{productCategoryController.goToAddEdit()}">
                                     <f:setPropertyActionListener target="#{productCategoryController.productCategory}"
                                                                  value="#{productCategory}" />
                                     <f:setPropertyActionListener target="#{productCategoryController.addOperation}"
@@ -52,8 +51,7 @@
                         </p:dataTable>
                         <div style="text-align: center;">
                             <p:commandButton
-                                value="Add New" action="#{productCategoryController.goToAddEdit()}"
-                                ajax="false">
+                                value="Add New" action="#{productCategoryController.goToAddEdit()}">
                                 <f:setPropertyActionListener target="#{productCategoryController.addOperation}"
                                                              value="true" />
                             </p:commandButton>
