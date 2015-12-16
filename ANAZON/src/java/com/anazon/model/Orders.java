@@ -10,7 +10,6 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -23,10 +22,10 @@ import javax.validation.constraints.NotNull;
 
 /**
  *
- * @author Abdallah
+ * @author Nick
  */
 @Entity
-@Table(name = "order") 
+@Table(name = "order")
 @NamedQueries({
     @NamedQuery(name = "Orders.findAll", query = "SELECT o FROM Orders o"),
     @NamedQuery(name = "Orders.findById", query = "SELECT o FROM Orders o WHERE o.id = :id"),
@@ -37,7 +36,6 @@ public class Orders implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue
     @Basic(optional = false)
     @NotNull
     @Column(name = "id")
@@ -52,6 +50,9 @@ public class Orders implements Serializable {
     @JoinColumn(name = "customre_id", referencedColumnName = "id")
     @ManyToOne
     private Customer customreId;
+    @JoinColumn(name = "payment_id", referencedColumnName = "id")
+    @ManyToOne
+    private PaymentInfo paymentId;
     @JoinColumn(name = "product_id", referencedColumnName = "id")
     @ManyToOne
     private Product productId;
@@ -101,6 +102,14 @@ public class Orders implements Serializable {
 
     public void setCustomreId(Customer customreId) {
         this.customreId = customreId;
+    }
+
+    public PaymentInfo getPaymentId() {
+        return paymentId;
+    }
+
+    public void setPaymentId(PaymentInfo paymentId) {
+        this.paymentId = paymentId;
     }
 
     public Product getProductId() {

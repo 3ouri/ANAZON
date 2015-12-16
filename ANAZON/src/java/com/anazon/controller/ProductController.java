@@ -22,7 +22,7 @@ import javax.inject.Named;
 
 /**
  *
- * @author Abdallah
+ * @author Nizomiddin
  */
 @SessionScoped
 @Named("productController")
@@ -36,11 +36,14 @@ public class ProductController implements Serializable {
     private List<SelectItem> productCategoryListAsSelectItem;
     private long selectedProductCategoryId;
     private ProductCategoryService productCategoryService;
+  
 
     public ProductController() {
         productService = new ProductServiceImpl();
         productCategoryService = new ProductCategoryServiceImpl();
 
+        // TODO: NIZOM - Temp
+        productsList = productService.getAll();
     }
 
     public String searchAll() {
@@ -131,4 +134,14 @@ public class ProductController implements Serializable {
     public void setSelectedProductCategoryId(long selectedProductCategoryId) {
         this.selectedProductCategoryId = selectedProductCategoryId;
     }
+
+    public String productDetails() {
+        return "productDetails";
+    }
+
+    public String goToSubmission() {
+        return "submissionPage";
+    }
+
+
 }
