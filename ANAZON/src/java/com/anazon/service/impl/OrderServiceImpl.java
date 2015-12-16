@@ -53,4 +53,14 @@ public class OrderServiceImpl implements OrderService {
         orderDAO.deleteAll(selectedOrders);
     }
 
+    @Override
+    public List<Orders> getAllByCustomerId(String customerId) {
+        return orderDAO.getAllByCustomerId(customerId);
+    }
+
+    @Override
+    public List<Orders> getAllByProductId(String productId) {
+        return orderDAO.getAllByProductId(productId);
+    }
+
 }

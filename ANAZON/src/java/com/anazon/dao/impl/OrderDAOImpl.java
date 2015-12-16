@@ -54,4 +54,16 @@ public class OrderDAOImpl implements OrderDAO {
         generalDAOImpl.deleteAllObjects(selectedOrders);
     }
 
+    @Override
+    public List<Orders> getAllByCustomerId(String customerId) {
+        Expression expression = new ExpressionBuilder().get("customreId").get("id").equal(customerId);
+        return generalDAOImpl.getAllObjectsByExpression(Orders.class, expression);
+    }
+
+    @Override
+    public List<Orders> getAllByProductId(String productId) {
+        Expression expression = new ExpressionBuilder().get("productId").get("id").equal(productId);
+        return generalDAOImpl.getAllObjectsByExpression(Orders.class, expression);
+    }
+
 }
