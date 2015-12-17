@@ -6,7 +6,7 @@
 package com.anazon.dao;
 
 import com.anazon.model.Customer;
-import com.anazon.model.User;
+import com.anazon.model.SystemUser;
 import java.util.List;
 
 /**
@@ -23,7 +23,7 @@ public interface CustomerDAO {
 
     public Customer addCustomer(Customer c);
 
-    public List<User> getUsers();
+    public List<SystemUser> getUsers();
 
     public Customer getCustByUserID(String usname);
 

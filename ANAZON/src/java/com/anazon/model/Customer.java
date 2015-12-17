@@ -12,12 +12,16 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -25,38 +29,37 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "customer")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Customer.findAll", query = "SELECT c FROM Customer c"),
-    @NamedQuery(name = "Customer.findById", query = "SELECT c FROM Customer c WHERE c.id = :id"),
-    @NamedQuery(name = "Customer.findByCity", query = "SELECT c FROM Customer c WHERE c.city = :city"),
-    @NamedQuery(name = "Customer.findByFirstname", query = "SELECT c FROM Customer c WHERE c.firstname = :firstname"),
-    @NamedQuery(name = "Customer.findByLastname", query = "SELECT c FROM Customer c WHERE c.lastname = :lastname"),
-    @NamedQuery(name = "Customer.findByPhone", query = "SELECT c FROM Customer c WHERE c.phone = :phone"),
-    @NamedQuery(name = "Customer.findByState", query = "SELECT c FROM Customer c WHERE c.state = :state"),
-    @NamedQuery(name = "Customer.findByZip", query = "SELECT c FROM Customer c WHERE c.zip = :zip")})
+    @NamedQuery(name = "Customer.findById", query = "SELECT c FROM Customer c   where c.userid.username = :usname")
+})
 public class Customer implements Serializable {
 
+    @JoinColumn(name = "userid", referencedColumnName = "id")
+    @ManyToOne
+    private SystemUser userid;
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue
     @Basic(optional = false)
     @NotNull
+    @GeneratedValue
     @Column(name = "id")
     private Integer id;
-    @Size(max = 255)
-    @Column(name = "city")
-    private String city;
-    @Size(max = 255)
+    @Size(max = 45)
     @Column(name = "firstname")
     private String firstname;
-    @Size(max = 255)
+    @Size(max = 45)
     @Column(name = "lastname")
     private String lastname;
     // @Pattern(regexp="^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$", message="Invalid phone/fax format, should be as xxx-xxx-xxxx")//if the field contains phone or fax number consider using this annotation to enforce field validation
-    @Size(max = 255)
+    @Size(max = 45)
     @Column(name = "phone")
     private String phone;
-    @Size(max = 255)
+    @Size(max = 45)
+    @Column(name = "city")
+    private String city;
+    @Size(max = 45)
     @Column(name = "state")
     private String state;
     @Column(name = "zip")
@@ -77,14 +80,6 @@ public class Customer implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
     }
 
     public String getFirstname() {
@@ -111,6 +106,14 @@ public class Customer implements Serializable {
         this.phone = phone;
     }
 
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
     public String getState() {
         return state;
     }
@@ -127,6 +130,7 @@ public class Customer implements Serializable {
         this.zip = zip;
     }
 
+    @XmlTransient
     public List<Orders> getOrdersList() {
         return ordersList;
     }
@@ -157,7 +161,15 @@ public class Customer implements Serializable {
 
     @Override
     public String toString() {
-        return "com.anazon.model.Customer[ id=" + id + " ]";
+        return "com.anazon.controller.Customer[ id=" + id + " ]";
     }
-    
+
+    public SystemUser getUserid() {
+        return userid;
+    }
+
+    public void setUserid(SystemUser userid) {
+        this.userid = userid;
+    }
+
 }

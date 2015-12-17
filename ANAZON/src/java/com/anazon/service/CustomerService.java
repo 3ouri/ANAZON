@@ -6,7 +6,7 @@
 package com.anazon.service;
 
 import com.anazon.model.Customer;
-import com.anazon.model.User;
+import com.anazon.model.SystemUser;
 import java.util.List;
 
 /**
@@ -19,9 +19,9 @@ public interface CustomerService {
 
     public Customer addCustomer(Customer customer);
 
-    public List<User> getUsers();
+    public List<SystemUser> getUsers();
 
-    public int login(User systemUser);
+    public int login(SystemUser systemUser);
 
     public Customer getCustByUserID(String usname);
 

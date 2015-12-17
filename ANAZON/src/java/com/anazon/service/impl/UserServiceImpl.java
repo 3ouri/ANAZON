@@ -7,7 +7,7 @@ package com.anazon.service.impl;
 
 import com.anazon.dao.UserDAO;
 import com.anazon.dao.impl.UserDAOImpl;
-import com.anazon.model.User;
+import com.anazon.model.SystemUser;
 import com.anazon.service.UserService;
 import java.io.Serializable;
 import java.util.List;
@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService ,Serializable{
     }
 
     @Override
-    public List<User> getAllUsers() {
+    public List<SystemUser> getAllUsers() {
         return userDAO.getAllUsers();
     }
 

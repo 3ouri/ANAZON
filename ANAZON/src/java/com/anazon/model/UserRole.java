@@ -10,6 +10,7 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -17,6 +18,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -24,10 +27,9 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "user_role")
+@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "UserRole.findAll", query = "SELECT u FROM UserRole u"),
-    @NamedQuery(name = "UserRole.findById", query = "SELECT u FROM UserRole u WHERE u.id = :id"),
-    @NamedQuery(name = "UserRole.findByRoleType", query = "SELECT u FROM UserRole u WHERE u.roleType = :roleType")})
+    @NamedQuery(name = "UserRole.findAll", query = "SELECT u FROM UserRole u where u.id = 1")})
 public class UserRole implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -35,12 +37,13 @@ public class UserRole implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "id")
+    @GeneratedValue
     private Integer id;
-    @Size(max = 255)
+    @Size(max = 45)
     @Column(name = "role_type")
     private String roleType;
     @OneToMany(mappedBy = "roleId")
-    private List<User> userList;
+    private List<SystemUser> userList;
 
     public UserRole() {
     }
@@ -65,11 +68,12 @@ public class UserRole implements Serializable {
         this.roleType = roleType;
     }
 
-    public List<User> getUserList() {
+    @XmlTransient
+    public List<SystemUser> getUserList() {
         return userList;
     }
 
-    public void setUserList(List<User> userList) {
+    public void setUserList(List<SystemUser> userList) {
         this.userList = userList;
     }
 
@@ -95,7 +99,7 @@ public class UserRole implements Serializable {
 
     @Override
     public String toString() {
-        return "com.anazon.model.UserRole[ id=" + id + " ]";
+        return "com.anazon.controller.UserRole[ id=" + id + " ]";
     }
-    
+
 }

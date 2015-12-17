@@ -6,7 +6,7 @@
 package com.anazon.dao.impl;
 
 import com.anazon.dao.UserDAO;
-import com.anazon.model.User;
+import com.anazon.model.SystemUser;
 import java.util.List;
 
 /**
@@ -22,8 +22,8 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public List<User> getAllUsers() {
-        return generalDAOImpl.getAllObjects(User.class);
+    public List<SystemUser> getAllUsers() {
+        return generalDAOImpl.getAllObjects(SystemUser.class);
     }
 
 }

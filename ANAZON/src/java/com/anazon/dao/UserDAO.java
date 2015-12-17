@@ -5,7 +5,7 @@
  */
 package com.anazon.dao;
 
-import com.anazon.model.User;
+import com.anazon.model.SystemUser;
 import java.util.List;
 
 /**
@@ -14,5 +14,5 @@ import java.util.List;
  */
 public interface UserDAO {
 
-    public List<User> getAllUsers();
+    public List<SystemUser> getAllUsers();
 }

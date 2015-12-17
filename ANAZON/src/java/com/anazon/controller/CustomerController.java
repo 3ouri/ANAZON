@@ -7,7 +7,7 @@ package com.anazon.controller;
 
 import com.anazon.common.Util;
 import com.anazon.model.Customer;
-import com.anazon.model.User;
+import com.anazon.model.SystemUser;
 import com.anazon.model.UserRole;
 import com.anazon.service.CustomerService;
 import com.anazon.service.UserService;
@@ -38,7 +38,7 @@ public class CustomerController implements Serializable {
     private UserService userService;
     private List<Customer> clist;
     private Customer cust;
-    private User user;
+    private SystemUser user;
     private UserRole userRole;
     private String uname;
     private int isloged;
@@ -47,7 +47,7 @@ public class CustomerController implements Serializable {
         customerService = new CustomerServiceImpl();
         userService = new UserServiceImpl();
         clist = new ArrayList<Customer>();
-        user = new User();
+        user = new SystemUser();
         userRole = new UserRole();
         cust = new Customer();
     }
@@ -72,11 +72,11 @@ public class CustomerController implements Serializable {
         return clist;
     }
 
-    public User getUser() {
+    public SystemUser getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(SystemUser user) {
         this.user = user;
     }
 
@@ -97,7 +97,7 @@ public class CustomerController implements Serializable {
         return clist;
     }
 
-    public String addCustomer(Customer customer, User u) {
+    public String addCustomer(Customer customer, SystemUser u) {
         user.setStatus("ACTIVE");
         user.setRoleId(userRole);
         customer.setUserid(user);
@@ -105,7 +105,7 @@ public class CustomerController implements Serializable {
         return "sucess";
     }
 
-    public String login(User u) {
+    public String login(SystemUser u) {
         isloged = customerService.login(user);
         switch (isloged) {
             case 1:

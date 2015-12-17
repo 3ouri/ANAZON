@@ -5,7 +5,7 @@
  */
 package com.anazon.controller;
 
-import com.anazon.model.User;
+import com.anazon.model.SystemUser;
 import com.anazon.service.UserService;
 import com.anazon.service.impl.UserServiceImpl;
 import java.io.Serializable;
@@ -24,18 +24,18 @@ import javax.inject.Named;
 public class UserController implements Serializable {
 
     private UserService service;
-    private List<User> usersList= new ArrayList<User>();
+    private List<SystemUser> usersList= new ArrayList<SystemUser>();
 
     public UserController() {
         service = new UserServiceImpl();
         usersList = service.getAllUsers();
     }
 
-    public List<User> getUsersList() {
+    public List<SystemUser> getUsersList() {
         return usersList;
     }
 
-    public void setUsersList(List<User> usersList) {
+    public void setUsersList(List<SystemUser> usersList) {
         this.usersList = usersList;
     }
 

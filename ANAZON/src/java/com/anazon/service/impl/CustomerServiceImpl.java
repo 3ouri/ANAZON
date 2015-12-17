@@ -9,7 +9,7 @@ import com.anazon.common.Util;
 import com.anazon.dao.CustomerDAO;
 import com.anazon.dao.impl.CustomreDAOImpl;
 import com.anazon.model.Customer;
-import com.anazon.model.User;
+import com.anazon.model.SystemUser;
 import com.anazon.service.CustomerService;
 import java.util.List;
 import javax.servlet.http.HttpSession;
@@ -34,15 +34,15 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public List<User> getUsers() {
+    public List<SystemUser> getUsers() {
         return customreDAOImpl.getUsers();
     }
 
     @Override
-    public int  login(User u) {
-        List<User> systemUsers = customreDAOImpl.getUsers();
+    public int  login(SystemUser u) {
+        List<SystemUser> systemUsers = customreDAOImpl.getUsers();
 
-        for (User sys : systemUsers) {
+        for (SystemUser sys : systemUsers) {
             if (u.getUsername().equals(sys.getUsername())
                     && u.getPassword().equals(sys.getPassword()))
             {

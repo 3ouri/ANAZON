@@ -6,17 +6,22 @@
 package com.anazon.model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -24,34 +29,47 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "user")
+@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
-    @NamedQuery(name = "User.findById", query = "SELECT u FROM User u WHERE u.id = :id"),
-    @NamedQuery(name = "User.findByPassword", query = "SELECT u FROM User u WHERE u.password = :password"),
-    @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.username = :username")})
-public class User implements Serializable {
+    @NamedQuery(name = "SystemUser.findAll", query = "SELECT u FROM SystemUser u")})
+public class SystemUser implements Serializable {
+
+    @Size(max = 45)
+    @Column(name = "status"  )
+    private String status;
+
+    @OneToMany(mappedBy = "userid")
+    private Collection<Customer> customerCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
     @Column(name = "id")
+    @GeneratedValue
     private Integer id;
-    @Size(max = 255)
-    @Column(name = "password")
-    private String password;
-    @Size(max = 255)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "username")
     private String username;
+    @Size(max = 45)
+    @Column(name = "password")
+    private String password;
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     @ManyToOne
     private UserRole roleId;
 
-    public User() {
+    public SystemUser() {
     }
 
-    public User(Integer id) {
+    public SystemUser(Integer id) {
         this.id = id;
+    }
+
+    public SystemUser(Integer id, String username) {
+        this.id = id;
+        this.username = username;
     }
 
     public Integer getId() {
@@ -62,20 +80,20 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getUsername() {
         return username;
     }
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public UserRole getRoleId() {
@@ -96,10 +114,10 @@ public class User implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof User)) {
+        if (!(object instanceof SystemUser)) {
             return false;
         }
-        User other = (User) object;
+        SystemUser other = (SystemUser) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -108,7 +126,24 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "com.anazon.model.User[ id=" + id + " ]";
+        return "com.anazon.controller.User[ id=" + id + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Customer> getCustomerCollection() {
+        return customerCollection;
+    }
+
+    public void setCustomerCollection(Collection<Customer> customerCollection) {
+        this.customerCollection = customerCollection;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
     
 }

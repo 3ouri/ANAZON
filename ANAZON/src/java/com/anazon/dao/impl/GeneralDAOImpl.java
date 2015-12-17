@@ -1,9 +1,14 @@
 package com.anazon.dao.impl;
 
 import com.anazon.common.ConfigurationConstants.SortingType;
+import com.anazon.model.Customer;
+import com.anazon.model.SystemUser;
+import com.anazon.model.UserRole;
 import java.util.Collection;
+import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import org.eclipse.persistence.expressions.Expression;
 import org.eclipse.persistence.jpa.JpaEntityManager;
 import org.eclipse.persistence.queries.ReadAllQuery;
@@ -13,12 +18,13 @@ import org.eclipse.persistence.sessions.UnitOfWork;
 public class GeneralDAOImpl {
 
     private static GeneralDAOImpl generalDAO;
-    private static final String persistenceUnitName = "DataLayer";
+    private static final String persistenceUnitName = "test";
     private static EntityManagerFactory factory;
     private JpaEntityManager em;
     private UnitOfWork uow;
 
     private GeneralDAOImpl() {
+
         factory = Persistence.createEntityManagerFactory(persistenceUnitName);
     }
 
@@ -84,7 +90,6 @@ public class GeneralDAOImpl {
 
     public <T> T getObjectByExpression(Class clazz, Expression expression) {
         instantiateConnection();
-
         T clone;
         clone = (T) uow.readObject(clazz, expression);
         terminateConnection();
@@ -146,5 +151,33 @@ public class GeneralDAOImpl {
         clone = getAllObjectsByExpression(clazz, expression);
         deleteAllObjects(clone);
         return clone;
+    }
+
+    public UserRole getUSerByWhere() {
+        instantiateConnection();
+        UserRole rolelist
+                = em.createNamedQuery("UserRole.findAll", UserRole.class).getSingleResult();
+        terminateConnection();
+        return rolelist;
+
+    }
+
+    public List<SystemUser> getSystemUsers() {
+        instantiateConnection();
+        List<SystemUser> systemUsers
+                = em.createNamedQuery("SystemUser.findAll", SystemUser.class).getResultList();
+        terminateConnection();
+        return systemUsers;
+    }
+
+    public Customer getCustByUserID(String usname) {
+        instantiateConnection();
+        Query q = em.createNamedQuery("Customer.findById", Customer.class);
+        q.setParameter("usname", usname);
+        Object result = q.getSingleResult();
+//         Customer customer = 
+//                em.createNamedQuery("Customer.findById", Customer.class).getSingleResult();
+        terminateConnection();
+        return (Customer) result;
     }
 }

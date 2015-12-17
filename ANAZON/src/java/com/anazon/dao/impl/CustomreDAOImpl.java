@@ -6,9 +6,9 @@
 package com.anazon.dao.impl;
 
 import com.anazon.dao.CustomerDAO;
-import com.anazon.dao.GeneralDAO;
+import com.anazon.dao.impl.CustomreDAOImpl;
 import com.anazon.model.Customer;
-import com.anazon.model.User;
+import com.anazon.model.SystemUser;
 import com.anazon.model.UserRole;
 import java.io.Serializable;
 import java.util.List;
@@ -20,10 +20,10 @@ import java.util.List;
  */
 public class CustomreDAOImpl implements CustomerDAO , Serializable{
     private static  CustomreDAOImpl customreDAOImpl;
-    private GeneralDAO generalDAO;
+    private GeneralDAOImpl generalDAO;
     private static UserDAOImpl userDAOImpl;
     public CustomreDAOImpl() {
-        generalDAO = GeneralDAO.getInstance();
+        generalDAO = GeneralDAOImpl.getInstance();
     }
     
     	public static CustomreDAOImpl getInstance() {
@@ -34,7 +34,7 @@ public class CustomreDAOImpl implements CustomerDAO , Serializable{
     
     @Override
     public List<Customer> getAllCustomers() {
-//        List<User> cuser = generalDAO.getAllObjects(User.class);
+//        List<User> cuser = generalDAO.getAllObjects(SystemUser.class);
             return generalDAO.getAllObjects(Customer.class);
     }
 
@@ -57,7 +57,7 @@ public class CustomreDAOImpl implements CustomerDAO , Serializable{
     }
 
     @Override
-    public List<User> getUsers() {
+    public List<SystemUser> getUsers() {
         return generalDAO.getSystemUsers();
     }
 
