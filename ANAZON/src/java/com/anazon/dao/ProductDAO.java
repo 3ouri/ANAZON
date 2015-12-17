@@ -25,4 +25,6 @@ public interface ProductDAO {
     public Product delete(Product product);
 
     public void deleteAll(List<Product> selectedProducts);
+
+    public List<Product> getProductsByCategoryId(int categoryId);
 }

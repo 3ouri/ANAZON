@@ -36,7 +36,7 @@ public class UserRole implements Serializable {
     @NotNull
     @Column(name = "id")
     private Integer id;
-    @Size(max = 45)
+    @Size(max = 255)
     @Column(name = "role_type")
     private String roleType;
     @OneToMany(mappedBy = "roleId")

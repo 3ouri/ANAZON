@@ -13,49 +13,35 @@
             </f:facet>
         </h:head>
         <h:body>
-            <p:layout style="width:100%" fullPage="false">
-                <p:layoutUnit position="north" size="140" style="border-style: none;" resizable="true" closable="true" collapsible="true">
-                    <h1> Welcome  </h1>
-                </p:layoutUnit>
+            <h:form>
+                <p:layout fullPage="false">
 
-                <p:layoutUnit position="west" size="245" style="border-style: none;">
-                    <p:menu>
-                        <p:submenu label="Resources" style="background-color: green;">
-                            <p:menuitem value="Electronics" url="http://www.primefaces.org/showcase-labs/ui/home.jsf" />
-                            <p:menuitem value="Clothes" url="http://www.primefaces.org/documentation.html" />
-                            <p:menuitem value="Toys" url="http://forum.primefaces.org/" />
-                            <p:menuitem value="Beauty" url="http://www.primefaces.org/themes.html" />
-                            <p:menuitem value="Books" url="http://www.primefaces.org/themes.html"/>
-                            <p:menuitem value="Tools" url="http://www.primefaces.org/themes.html"/>
-                            <p:menuitem value="Sports" url="http://www.primefaces.org/themes.html"/>
-                            <p:menuitem value="Automobile" url="http://www.primefaces.org/themes.html"/>
-                        </p:submenu>
-                    </p:menu>
-                </p:layoutUnit>
+                    <ui:include src="customerHeader.xhtml" />
+                    <ui:include src="customerMenu.xhtml" />
 
-                <p:layoutUnit position="center" style="border-style: none;">
+                    <p:layoutUnit position="center">
+                        <p:dataGrid var="product" value="#{productController.productsList}" columns="4"
+                                    rows="12" paginator="true" id="products" paginatorPosition="bottom"
+                                    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                    rowsPerPageTemplate="8,12,16">
 
-                    <h:form>
-                        <p:dataScroller value="#{productController.productsList}" var="t" chunkSize="4">
-                            <f:facet name="header">
-                                Products list
-                            </f:facet>
-
-                            <h:panelGrid columns="4" style="width:100%;">
-                                <p:graphicImage value="resources/imgs/camera.jpg" />   
-                                <h:outputText value="#{t.name}" style="font-weight: bold"/>
-                                <h:outputText value="#{t.price}" style="font-weight: bold"/>
-
-                                <h:commandButton id="detailsButton" value="Details" 
-                                                 action="#{productController.productDetails}">
-                                    <f:setPropertyActionListener target="#{productController.product}" value="#{t}" />
-                                </h:commandButton>
-                            </h:panelGrid>  
-                            <hr />
-                        </p:dataScroller>
-                    </h:form>
-                </p:layoutUnit>     
-            </p:layout>
+                            <!--                            <f:facet name="header">
+                                                            # {productController.headerTitle}
+                                                        </f:facet>-->
+                            <p:panel style="text-align:center">
+                                <p:commandLink id="detailsButton" action="#{productController.productDetails}" style="text-decoration: none;">
+                                    <p:panelGrid columns="1">
+                                        <p:graphicImage width="150" height="150" value="#{product.image}" />   
+                                        <p:outputLabel value="#{product.name}" style="font-weight: bold; cursor: pointer;"/>
+                                        <p:outputLabel value="$#{product.price}" style="font-weight: bold; color: green; font-size: 20px !important; cursor: pointer;"/>
+                                    </p:panelGrid>
+                                    <f:setPropertyActionListener target="#{productController.product}" value="#{product}" />
+                                </p:commandLink>
+                            </p:panel>
+                        </p:dataGrid>
+                    </p:layoutUnit>     
+                </p:layout>
+            </h:form>
         </h:body>
     </f:view>
 </html>

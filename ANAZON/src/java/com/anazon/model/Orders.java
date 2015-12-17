@@ -10,6 +10,7 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -22,29 +23,30 @@ import javax.validation.constraints.NotNull;
 
 /**
  *
- * @author Nick
+ * @author Abdallah
  */
 @Entity
-@Table(name = "order")
+@Table(name = "orders")
 @NamedQueries({
     @NamedQuery(name = "Orders.findAll", query = "SELECT o FROM Orders o"),
     @NamedQuery(name = "Orders.findById", query = "SELECT o FROM Orders o WHERE o.id = :id"),
-    @NamedQuery(name = "Orders.findByQuantity", query = "SELECT o FROM Orders o WHERE o.quantity = :quantity"),
     @NamedQuery(name = "Orders.findByDate", query = "SELECT o FROM Orders o WHERE o.date = :date"),
+    @NamedQuery(name = "Orders.findByQuantity", query = "SELECT o FROM Orders o WHERE o.quantity = :quantity"),
     @NamedQuery(name = "Orders.findByTotalPrice", query = "SELECT o FROM Orders o WHERE o.totalPrice = :totalPrice")})
 public class Orders implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue
     @Basic(optional = false)
     @NotNull
     @Column(name = "id")
     private Integer id;
-    @Column(name = "quantity")
-    private Integer quantity;
     @Column(name = "date")
     @Temporal(TemporalType.DATE)
     private Date date;
+    @Column(name = "quantity")
+    private Integer quantity;
     @Column(name = "total_price")
     private Integer totalPrice;
     @JoinColumn(name = "customre_id", referencedColumnName = "id")
@@ -72,20 +74,20 @@ public class Orders implements Serializable {
         this.id = id;
     }
 
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
-    }
-
     public Date getDate() {
         return date;
     }
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 
     public Integer getTotalPrice() {

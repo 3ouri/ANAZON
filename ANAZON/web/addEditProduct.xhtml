@@ -6,8 +6,11 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>ANAZON</title>
-
+        <h:outputStylesheet library="css" name="styles.css" />
+        <f:facet name="first">
+            <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+            <title>ANAZON</title>
+        </f:facet>
     </h:head>
 
     <h:body>
@@ -40,13 +43,17 @@
                             <f:selectItem itemLabel="Select one" itemValue="-1" />
                             <f:selectItems value="#{productController.productCategoryListAsSelectItem}"></f:selectItems>
                         </p:selectOneMenu>
+                        <h:outputLabel value="Image Path" />
+                        <p:inputText id="image" required="true" label="image"
+                                     requiredMessage="Image Path Required"
+                                     value="#{productController.product.image}" />
                         <h:outputLabel value="Description" />
-                        <p:inputText id="description" required="false" label="description"
-                                     requiredMessage="Description Required"
-                                     value="#{productController.product.descrption}" />
+                        <p:inputTextarea id="description" required="false" label="description"
+                                         requiredMessage="Description Required"
+                                         value="#{productController.product.descrption}" />
                         <p:commandButton value="Save" action="#{productController.applyAddEdit}" update="mainIdForm" />
                     </h:panelGrid>
-                    
+
                     <p:messages />
 
                 </p:layoutUnit>

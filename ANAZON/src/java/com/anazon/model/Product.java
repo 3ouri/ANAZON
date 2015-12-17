@@ -13,7 +13,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -31,15 +30,12 @@ import javax.validation.constraints.Size;
 @NamedQueries({
     @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p"),
     @NamedQuery(name = "Product.findById", query = "SELECT p FROM Product p WHERE p.id = :id"),
-    @NamedQuery(name = "Product.findByName", query = "SELECT p FROM Product p WHERE p.name = :name"),
     @NamedQuery(name = "Product.findByDescrption", query = "SELECT p FROM Product p WHERE p.descrption = :descrption"),
-    @NamedQuery(name = "Product.findByQunitity", query = "SELECT p FROM Product p WHERE p.qunitity = :qunitity"),
-    @NamedQuery(name = "Product.findByPrice", query = "SELECT p FROM Product p WHERE p.price = :price")})
+    @NamedQuery(name = "Product.findByImage", query = "SELECT p FROM Product p WHERE p.image = :image"),
+    @NamedQuery(name = "Product.findByName", query = "SELECT p FROM Product p WHERE p.name = :name"),
+    @NamedQuery(name = "Product.findByPrice", query = "SELECT p FROM Product p WHERE p.price = :price"),
+    @NamedQuery(name = "Product.findByQunitity", query = "SELECT p FROM Product p WHERE p.qunitity = :qunitity")})
 public class Product implements Serializable {
-
-    @Lob
-    @Column(name = "image")
-    private byte[] image;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -48,16 +44,19 @@ public class Product implements Serializable {
     @NotNull
     @Column(name = "id")
     private Integer id;
-    @Size(max = 45)
-    @Column(name = "name")
-    private String name;
-    @Size(max = 250)
+    @Size(max = 4000)
     @Column(name = "descrption")
     private String descrption;
-    @Column(name = "qunitity")
-    private Integer qunitity;
+    @Size(max = 255)
+    @Column(name = "image")
+    private String image;
+    @Size(max = 1000)
+    @Column(name = "name")
+    private String name;
     @Column(name = "price")
     private Integer price;
+    @Column(name = "qunitity")
+    private Integer qunitity;
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     @ManyToOne
     private ProductCategory categoryId;
@@ -79,14 +78,6 @@ public class Product implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getDescrption() {
         return descrption;
     }
@@ -95,12 +86,20 @@ public class Product implements Serializable {
         this.descrption = descrption;
     }
 
-    public Integer getQunitity() {
-        return qunitity;
+    public String getImage() {
+        return image;
     }
 
-    public void setQunitity(Integer qunitity) {
-        this.qunitity = qunitity;
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Integer getPrice() {
@@ -109,6 +108,14 @@ public class Product implements Serializable {
 
     public void setPrice(Integer price) {
         this.price = price;
+    }
+
+    public Integer getQunitity() {
+        return qunitity;
+    }
+
+    public void setQunitity(Integer qunitity) {
+        this.qunitity = qunitity;
     }
 
     public ProductCategory getCategoryId() {
@@ -150,14 +157,6 @@ public class Product implements Serializable {
     @Override
     public String toString() {
         return "com.anazon.model.Product[ id=" + id + " ]";
-    }
-
-    public byte[] getImage() {
-        return image;
-    }
-
-    public void setImage(byte[] image) {
-        this.image = image;
     }
 
 }

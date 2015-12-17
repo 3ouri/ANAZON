@@ -4,23 +4,61 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
-    <h:head>
-        <h:outputStylesheet library="css" name="styles.css" />
-        <f:facet name="first">
-            <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
-            <title>Product Details</title>
-        </f:facet>
-    </h:head>
-    <h:body>
-        <h:form>
-            <h:panelGrid columns="1" style="width:100%; text-align: left;">
-                <div><p:graphicImage value="resources/imgs/camera.jpg" /> #{productController.product.name}<br />
-                    #{productController.product.price} <br /> #{productController.product.descrption}</div>
-            </h:panelGrid>  
-            <h:commandButton id="Buy" value="Buy" 
-                             action="#{productController.goToSubmission}">
-                <f:setPropertyActionListener target="#{productController.product}" value="#{productController.product}" />
-            </h:commandButton>
-        </h:form>
-    </h:body>
+    <f:view contentType="text/html">
+        <h:head>
+            <h:outputStylesheet library="css" name="styles.css" />
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>ANAZON</title>
+            </f:facet>
+        </h:head>
+        <h:body>
+            <h:form>
+
+                <p:layout fullPage="false">
+
+                    <ui:include src="customerHeader.xhtml" />
+                    <ui:include src="customerMenu.xhtml" />
+
+                    <p:layoutUnit position="center" style="border-style: none;">
+                        <p:panelGrid columns="4" style="width:100%; text-align: left;">
+                            <p:column>
+                                <p:graphicImage value="#{productController.product.image}" />
+                            </p:column>
+                            <p:column>
+                                <p:panelGrid columns="2">
+                                    <p:outputLabel style="font-weight: bold;" value="Name: " />
+                                    <p:outputLabel value="#{productController.product.name}" />
+
+                                    <p:outputLabel style="font-weight: bold;" value="Price: " />
+                                    <p:outputLabel style="font-weight: bold; color: green;" value="&#36;#{productController.product.price}" />
+
+                                    <p:outputLabel style="font-weight: bold;" value="Available Quantiity: " />
+                                    <p:outputLabel value="#{productController.product.qunitity}" />
+
+                                    <p:outputLabel style="font-weight: bold;" value="Description: " />
+                                    <p:outputLabel value="#{productController.product.descrption}" />
+                                </p:panelGrid>
+                            </p:column>
+                            <p:column>
+                                <p:panelGrid columns="2">
+                                    <p:outputLabel style="font-weight: bold;" value="Quantity: " />
+                                    <p:inputText style="width: 50px;" value="#{orderController.order.quantity}" />
+                                </p:panelGrid>
+                            </p:column>
+                            <p:column>
+                                <div align="right">
+                                    <p:commandButton id="Buy" value="Buy" action="#{productController.goToSubmission}" style="width: 200px; height: 50px;">
+                                        <f:setPropertyActionListener target="#{orderController.order.productId}" value="#{productController.product}" />
+                                    </p:commandButton>
+                                </div>
+                            </p:column>
+                        </p:panelGrid>
+                    </p:layoutUnit>     
+                </p:layout>
+
+            </h:form>
+        </h:body>
+    </f:view>
 </html>
+

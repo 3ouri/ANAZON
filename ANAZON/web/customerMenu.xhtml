@@ -1,0 +1,37 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:layoutUnit position="west" style="border-style: none;">
+        <p:menu>
+            <p:menuitem value="All Departments" style="font-weight: bold; font-size: 1.4em;" action="#{productController.getProductsByCategory}" ajax="false">
+                <f:setPropertyActionListener value="0" target="#{productController.categoryId}" />
+            </p:menuitem>
+
+            <p:menuitem value="Smart Electronics" action="#{productController.getProductsByCategory}" ajax="false">
+                <f:setPropertyActionListener value="1" target="#{productController.categoryId}" />
+            </p:menuitem>
+
+            <p:menuitem value="Men's Clothing" action="#{productController.getProductsByCategory}" ajax="false">
+                <f:setPropertyActionListener value="2" target="#{productController.categoryId}" />
+            </p:menuitem>
+
+            <p:menuitem value="Women's Clothing" action="#{productController.getProductsByCategory}" ajax="false">
+                <f:setPropertyActionListener value="3" target="#{productController.categoryId}" />
+            </p:menuitem>
+
+            <p:menuitem value="Phone &amp; Accessories" />
+            <p:menuitem value="Computer &amp; Office" />
+            <p:menuitem value="Jewelry &amp; Watches" />
+            <p:menuitem value="Home &amp; Garden" />
+            <p:menuitem value="Bags &amp; Shoes" />
+            <p:menuitem value="Toys, Kids &amp; Baby" />
+            <p:menuitem value="Sports &amp; Outdoors" />
+            <p:menuitem value="Health &amp; Beauty" />
+            <p:menuitem value="Automobiles &amp; Motorcycles" />
+            <p:menuitem value="Improvment Tools" />
+        </p:menu>
+    </p:layoutUnit>
+</ui:composition>

@@ -8,17 +8,80 @@
         <h:outputStylesheet library="css" name="styles.css" />
         <f:facet name="first">
             <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
-            <title>Confirmation page 2</title>
+            <title>ANAZON</title>
         </f:facet>
     </h:head>
     <h:body>
-        
-            #{orderController.customer.firstname}
-            #{orderController.customer.lastname} 
-            #{orderController.paymentInfo.creditCardNum}
-             
+        <h:form>
+            <p:layout fullPage="false">
 
-         
-       
+                <ui:include src="customerHeader.xhtml" />
+                <ui:include src="customerMenu.xhtml" />
+
+                <p:layoutUnit position="center" style="border-style: none;">
+                    <p:tab id="confirmation" title="Confirmation">
+                        <p:panel header="Confirmation">
+                            <h1>Customer Information</h1>
+                            <p:panelGrid columns="2">
+                                <p:outputLabel value="Name: " />
+                                <p:outputLabel value="#{orderController.customer.firstname} #{orderController.customer.lastname}" />
+
+                                <p:outputLabel value="Phone: " />
+                                <p:outputLabel value="#{orderController.customer.phone}" />
+
+                                <p:outputLabel value="City: " />
+                                <p:outputLabel value="#{orderController.customer.city}" />
+
+                                <p:outputLabel value="State: " />
+                                <p:outputLabel value="#{orderController.customer.state}" />
+                            </p:panelGrid>
+
+                            <br />
+                            <br />
+
+                            <h1>Payment Information</h1>
+                            <p:panelGrid columns="2">
+                                <p:outputLabel value="Printed Name: " />
+                                <p:outputLabel value="#{orderController.paymentInfo.printedName}" />
+
+                                <p:outputLabel value="Credit Card Number: " />
+                                <p:outputLabel value="#{orderController.paymentInfo.creditCardNum}" />
+
+                                <p:outputLabel value="CVS: " />
+                                <p:outputLabel value="#{orderController.paymentInfo.cvs}" />
+
+                                <p:outputLabel value="Expiration Date: " />
+                                <p:outputLabel value="#{orderController.paymentInfo.expirationDate}" />
+                            </p:panelGrid>
+
+                            <br />
+                            <br />
+
+                            <h1>Order Information</h1>
+                            <h:panelGrid columns="2" style="width:100%" columnClasses="logo,detail">
+                                <p:graphicImage width="300" height="300" value="#{orderController.order.productId.image}" /> 
+
+                                <p:outputPanel>
+                                    <h:panelGrid columns="2" cellpadding="5">
+                                        <h:outputText value="Product Name:" />
+                                        <h:outputText value="#{orderController.order.productId.name}" style="font-weight: bold"/>
+
+                                        <h:outputText value="Quantity Required:" />
+                                        <h:outputText value="#{orderController.order.quantity}" style="font-weight: bold"/>
+
+                                        <h:outputText value="Total Price: " />
+                                        <h:outputText value="&#36;#{orderController.order.totalPrice}" style="font-weight: bold; color: green;"/>
+                                    </h:panelGrid>
+                                </p:outputPanel>
+                            </h:panelGrid>
+                            <p:commandButton action="#{orderController.addOrder()}" value="Confirm" />
+                        </p:panel> 
+                    </p:tab>
+                </p:layoutUnit>
+            </p:layout>
+        </h:form>
+
+
+
     </h:body>
 </html>

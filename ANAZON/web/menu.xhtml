@@ -4,34 +4,24 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui">
 
-    <p:layoutUnit position="west" size="200" header="Menu" resizable="true"
-                  closable="false" collapsible="false">
+    <p:layoutUnit position="west" header="Menu" closable="false" collapsible="false">
         <p:menu style="width:182px">
 
-            <p:menuitem>
-                <p:commandLink action="index?faces-redirect=true" value="Home" immediate="true"></p:commandLink>
+            <p:menuitem action="index?faces-redirect=true" value="Home" immediate="true" />
+
+            <p:menuitem action="#{productController.goToProducts}" value="Products Management" ajax="false">
+                <f:setPropertyActionListener target="#{productController}" value="#{null}" />
             </p:menuitem>
 
-            <p:menuitem>
-                <p:commandLink action="#{productController.goToProducts}" value="Products">
-                    <f:setPropertyActionListener target="#{productController}"
-                                                 value="#{null}" />
-                </p:commandLink>
+            <p:menuitem action="#{productCategoryController.goToProductCategories()}" value="Categories Management" ajax="false">
+                <f:setPropertyActionListener target="#{productCategoryController}" value="#{null}" />
             </p:menuitem>
 
-            <p:menuitem>
-                <p:commandLink action="#{productCategoryController.goToProductCategories()}" value="Product Categories">
-                    <f:setPropertyActionListener target="#{productCategoryController}"
-                                                 value="#{null}" />
-                </p:commandLink>
-            </p:menuitem>
+            <p:menuitem value="Orders Management" />
 
-            <p:menuitem>
-                <p:commandLink action="#{orderController.goToOrders()}" value="Orders">
-                    <f:setPropertyActionListener target="#{orderController}"
-                                                 value="#{null}" />
-                </p:commandLink>
-            </p:menuitem>
+            <p:menuitem value="Users Management" />
+
+            <p:menuitem value="Customer Management" />
 
         </p:menu>
     </p:layoutUnit>

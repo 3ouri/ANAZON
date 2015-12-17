@@ -54,4 +54,10 @@ public class ProductDAOImpl implements ProductDAO {
         generalDAOImpl.deleteAllObjects(selectedProducts);
     }
 
+    @Override
+    public List<Product> getProductsByCategoryId(int categoryId) {
+        Expression expression = new ExpressionBuilder().get("categoryId").get("id").equal(categoryId);
+        return generalDAOImpl.getAllObjectsByExpression(Product.class, expression);
+    }
+
 }

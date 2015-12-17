@@ -28,8 +28,8 @@ import javax.validation.constraints.Size;
 @NamedQueries({
     @NamedQuery(name = "ProductCategory.findAll", query = "SELECT p FROM ProductCategory p"),
     @NamedQuery(name = "ProductCategory.findById", query = "SELECT p FROM ProductCategory p WHERE p.id = :id"),
-    @NamedQuery(name = "ProductCategory.findByTitle", query = "SELECT p FROM ProductCategory p WHERE p.title = :title"),
-    @NamedQuery(name = "ProductCategory.findByDescription", query = "SELECT p FROM ProductCategory p WHERE p.description = :description")})
+    @NamedQuery(name = "ProductCategory.findByDescription", query = "SELECT p FROM ProductCategory p WHERE p.description = :description"),
+    @NamedQuery(name = "ProductCategory.findByTitle", query = "SELECT p FROM ProductCategory p WHERE p.title = :title")})
 public class ProductCategory implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -39,12 +39,12 @@ public class ProductCategory implements Serializable {
     @NotNull
     @Column(name = "id")
     private Integer id;
-    @Size(max = 45)
-    @Column(name = "title")
-    private String title;
-    @Size(max = 45)
+    @Size(max = 255)
     @Column(name = "description")
     private String description;
+    @Size(max = 255)
+    @Column(name = "title")
+    private String title;
     @OneToMany(mappedBy = "categoryId")
     private List<Product> productList;
 
@@ -63,20 +63,20 @@ public class ProductCategory implements Serializable {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getDescription() {
         return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public List<Product> getProductList() {
@@ -111,5 +111,5 @@ public class ProductCategory implements Serializable {
     public String toString() {
         return "com.anazon.model.ProductCategory[ id=" + id + " ]";
     }
-    
+
 }

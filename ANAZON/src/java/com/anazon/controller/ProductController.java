@@ -36,14 +36,12 @@ public class ProductController implements Serializable {
     private List<SelectItem> productCategoryListAsSelectItem;
     private long selectedProductCategoryId;
     private ProductCategoryService productCategoryService;
-  
+    private int categoryId;
 
     public ProductController() {
         productService = new ProductServiceImpl();
         productCategoryService = new ProductCategoryServiceImpl();
-
-        // TODO: NIZOM - Temp
-        productsList = productService.getAll();
+        getProductsByCategory();
     }
 
     public String searchAll() {
@@ -81,6 +79,23 @@ public class ProductController implements Serializable {
         searchAll();
         product = new Product();
         return "listProducts?faces-redirect=true";
+    }
+
+    public String getProductsByCategory() {
+        if (categoryId != 0) {
+            productsList = productService.getProductsByCategoryId(categoryId);
+        } else {
+            searchAll();
+        }
+        return "productList?faces-redirect=true";
+    }
+
+    public String productDetails() {
+        return "productDetails?faces-redirect=true";
+    }
+
+    public String goToSubmission() {
+        return "submissionPage?faces-redirect=true";
     }
 
     public Product getProduct() {
@@ -135,13 +150,24 @@ public class ProductController implements Serializable {
         this.selectedProductCategoryId = selectedProductCategoryId;
     }
 
-    public String productDetails() {
-        return "productDetails";
+    public int getCategoryId() {
+        return categoryId;
     }
 
-    public String goToSubmission() {
-        return "submissionPage";
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 
+    public String getHeaderTitle() {
+        switch (categoryId) {
+            case 1:
+                return "Smart Electronics";
+            case 2:
+                return "Men's Clothing";
+            case 3:
+                return "Women's Clothing";
+        }
+        return "All Departments";
+    }
 
 }

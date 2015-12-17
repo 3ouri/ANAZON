@@ -53,4 +53,9 @@ public class ProductServiceImpl implements ProductService {
         productDAO.deleteAll(selectedProducts);
     }
 
+    @Override
+    public List<Product> getProductsByCategoryId(int categoryId) {
+        return productDAO.getProductsByCategoryId(categoryId);
+    }
+
 }

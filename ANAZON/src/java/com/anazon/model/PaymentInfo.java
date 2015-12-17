@@ -6,11 +6,12 @@
 package com.anazon.model;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -23,7 +24,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author Nick
+ * @author Abdallah
  */
 @Entity
 @Table(name = "payment_info")
@@ -32,50 +33,35 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "PaymentInfo.findById", query = "SELECT p FROM PaymentInfo p WHERE p.id = :id"),
     @NamedQuery(name = "PaymentInfo.findByCreditCardNum", query = "SELECT p FROM PaymentInfo p WHERE p.creditCardNum = :creditCardNum"),
     @NamedQuery(name = "PaymentInfo.findByCvs", query = "SELECT p FROM PaymentInfo p WHERE p.cvs = :cvs"),
-    @NamedQuery(name = "PaymentInfo.findByPrintedName", query = "SELECT p FROM PaymentInfo p WHERE p.printedName = :printedName"),
-    @NamedQuery(name = "PaymentInfo.findByExpirationDate", query = "SELECT p FROM PaymentInfo p WHERE p.expirationDate = :expirationDate")})
+    @NamedQuery(name = "PaymentInfo.findByExpirationDate", query = "SELECT p FROM PaymentInfo p WHERE p.expirationDate = :expirationDate"),
+    @NamedQuery(name = "PaymentInfo.findByPrintedName", query = "SELECT p FROM PaymentInfo p WHERE p.printedName = :printedName")})
 public class PaymentInfo implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue
     @Basic(optional = false)
     @NotNull
     @Column(name = "id")
     private Integer id;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "credit_card_num")
-    private int creditCardNum;
-    @Basic(optional = false)
-    @NotNull
+    private Integer creditCardNum;
     @Column(name = "cvs")
-    private int cvs;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
-    @Column(name = "printed_name")
-    private String printedName;
-    @Basic(optional = false)
-    @NotNull
+    private Integer cvs;
     @Column(name = "expiration_date")
     @Temporal(TemporalType.DATE)
     private Date expirationDate;
+    @Size(max = 255)
+    @Column(name = "printed_name")
+    private String printedName;
     @OneToMany(mappedBy = "paymentId")
-    private Collection<Orders> ordersCollection;
+    private List<Orders> ordersList;
 
     public PaymentInfo() {
     }
 
     public PaymentInfo(Integer id) {
         this.id = id;
-    }
-
-    public PaymentInfo(Integer id, int creditCardNum, int cvs, String printedName, Date expirationDate) {
-        this.id = id;
-        this.creditCardNum = creditCardNum;
-        this.cvs = cvs;
-        this.printedName = printedName;
-        this.expirationDate = expirationDate;
     }
 
     public Integer getId() {
@@ -86,28 +72,20 @@ public class PaymentInfo implements Serializable {
         this.id = id;
     }
 
-    public int getCreditCardNum() {
+    public Integer getCreditCardNum() {
         return creditCardNum;
     }
 
-    public void setCreditCardNum(int creditCardNum) {
+    public void setCreditCardNum(Integer creditCardNum) {
         this.creditCardNum = creditCardNum;
     }
 
-    public int getCvs() {
+    public Integer getCvs() {
         return cvs;
     }
 
-    public void setCvs(int cvs) {
+    public void setCvs(Integer cvs) {
         this.cvs = cvs;
-    }
-
-    public String getPrintedName() {
-        return printedName;
-    }
-
-    public void setPrintedName(String printedName) {
-        this.printedName = printedName;
     }
 
     public Date getExpirationDate() {
@@ -118,12 +96,20 @@ public class PaymentInfo implements Serializable {
         this.expirationDate = expirationDate;
     }
 
-    public Collection<Orders> getOrdersCollection() {
-        return ordersCollection;
+    public String getPrintedName() {
+        return printedName;
     }
 
-    public void setOrdersCollection(Collection<Orders> ordersCollection) {
-        this.ordersCollection = ordersCollection;
+    public void setPrintedName(String printedName) {
+        this.printedName = printedName;
+    }
+
+    public List<Orders> getOrdersList() {
+        return ordersList;
+    }
+
+    public void setOrdersList(List<Orders> ordersList) {
+        this.ordersList = ordersList;
     }
 
     @Override
@@ -150,5 +136,5 @@ public class PaymentInfo implements Serializable {
     public String toString() {
         return "com.anazon.model.PaymentInfo[ id=" + id + " ]";
     }
-    
+
 }

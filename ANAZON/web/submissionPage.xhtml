@@ -8,33 +8,45 @@
         <h:outputStylesheet library="css" name="styles.css" />
         <f:facet name="first">
             <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
-            <title>Confirmation Page</title>
+            <title>ANAZON</title>
         </f:facet>
     </h:head>
 
     <h:body>
         <h:form>
-            <p:tab id="personal" title="Personal">
-                <p:panel header="Information"> 
+            <p:layout fullPage="false">
 
+                <ui:include src="customerHeader.xhtml" />
+                <ui:include src="customerMenu.xhtml" />
 
-                    <h:panelGrid columns="2" columnClasses="label, value">
-                        <h:outputText value="Firstname: *" />
-                        <p:inputText value="#{orderController.customer.firstname}" required="true" label="Firstname"/>
+                <p:layoutUnit position="center" style="border-style: none;">
+                    <p:tab id="personal" title="Personal">
+                        <p:panel header="Information"> 
+                            <h1>Payment Information</h1>
+                            <p:panelGrid columns="2">
+                                <p:outputLabel value="Printed Name: *" />
+                                <p:inputText value="#{orderController.paymentInfo.printedName}" required="true" label="PrintedName"/>
 
-                        <h:outputText value="Lastname: *" />
-                        <p:inputText value="#{orderController.customer.lastname}" required="true" label="Lastname"/>
+                                <p:outputLabel value="Credit Card Number: *" />
+                                <p:inputText value="#{orderController.paymentInfo.creditCardNum}" required="true" label="CreditCardNumber"/>
 
-                        <h:outputText value="Credit card number: *" />
-                        <p:inputText value="#{orderController.paymentInfo.creditCardNum}" required="true" label="CreditCardNumber"/>
-                    </h:panelGrid>
-                    <h:panelGrid>
-                        <h:commandButton id="Submit" value="Submit" 
-                                         action="#{orderController.goToConfirmationPage}">
-                        </h:commandButton>
-                    </h:panelGrid>        
-                </p:panel> 
-            </p:tab>
+                                <p:outputLabel value="CVS: *" />
+                                <p:inputText value="#{orderController.paymentInfo.cvs}" required="true" label="CVS"/>
+
+                                <p:outputLabel value="Expiration Date: *" />
+                                <p:calendar value="#{orderController.paymentInfo.expirationDate}" />
+
+                                <p:outputLabel />
+                                <p:outputLabel />
+
+                                <p:commandButton id="Submit" value="Submit" action="#{orderController.goToConfirmationPage}" />
+                            </p:panelGrid>
+
+                        </p:panel> 
+                    </p:tab>
+                </p:layoutUnit>
+
+            </p:layout>
         </h:form>
     </h:body>
 </html>

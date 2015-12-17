@@ -27,8 +27,8 @@ import javax.validation.constraints.Size;
 @NamedQueries({
     @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
     @NamedQuery(name = "User.findById", query = "SELECT u FROM User u WHERE u.id = :id"),
-    @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.username = :username"),
-    @NamedQuery(name = "User.findByPassword", query = "SELECT u FROM User u WHERE u.password = :password")})
+    @NamedQuery(name = "User.findByPassword", query = "SELECT u FROM User u WHERE u.password = :password"),
+    @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.username = :username")})
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -37,14 +37,12 @@ public class User implements Serializable {
     @NotNull
     @Column(name = "id")
     private Integer id;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
-    @Column(name = "username")
-    private String username;
-    @Size(max = 45)
+    @Size(max = 255)
     @Column(name = "password")
     private String password;
+    @Size(max = 255)
+    @Column(name = "username")
+    private String username;
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     @ManyToOne
     private UserRole roleId;
@@ -56,11 +54,6 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public User(Integer id, String username) {
-        this.id = id;
-        this.username = username;
-    }
-
     public Integer getId() {
         return id;
     }
@@ -69,20 +62,20 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public UserRole getRoleId() {

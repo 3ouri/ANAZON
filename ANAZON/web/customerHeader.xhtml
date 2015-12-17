@@ -1,0 +1,54 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+    <style>
+        .ui-widget {
+            font-size: 15px !important;
+            font-weight: lighter;
+        }
+
+        .ui-layout-unit-header,.ui-layout-unit-footer {
+            padding: 0.4em;
+            position: relative;
+            text-align: center;
+        }
+
+        .selectOneMenuWidth {
+            width: 215px;
+        }
+    </style>
+
+    <p:layoutUnit position="north">
+        <table style="padding: 0em 0em 0em 3em; background-color: #232f3e; width: 100%;">
+            <tr>
+                <td>
+                    <p:graphicImage value="resources/imgs/the logo.png" width="150" height="125" />
+                </td>
+                <td style="width: 75%;">
+                    <p:inputText style="width: 50em; height: 2.5em" />
+                    <p:commandButton style="height: 3.1em; width: 10em; margin: 0 0 0 1.5em;" value="Search " action="#{productController.getProductsByCategory}" ajax="false">
+                        <f:setPropertyActionListener value="1" target="#{productController.categoryId}" />
+                    </p:commandButton>
+                </td>
+                <td>
+                    <p:commandButton value="Login" />
+                </td>
+            </tr>
+        </table>
+        <!--        <p:panelGrid columns="3" style="width:100%;">
+                    <p:column>
+        
+                    </p:column>
+                    <p:column>
+        
+                    </p:column>
+                    <p:column>
+                        <p:commandLink value="Login" />
+                    </p:column>
+        
+                </p:panelGrid>-->
+    </p:layoutUnit>
+
+</ui:composition>
