@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">   
+    <h:head>
+        <title>My Account</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+
+    <f:view contentType="text/html">
+        <h:head>
+            <title>My Account</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        </h:head>
+        <h:body>
+            <h:form>
+                <p:layout fullPage="true" style="height:100%">
+                    <p:layoutUnit position="north" size="100" style="border: 0px">
+                        <h:outputText value="LOGO + name " />
+                    </p:layoutUnit>
+                    <p:layoutUnit position="west" resizable="true" size="150" minSize="40" maxSize="200">
+                        West
+                    </p:layoutUnit>
+                    <p:layoutUnit position="center" >
+                        <p:panel  id="panel" header="My Profile" style="margin-bottom:10px; border: 0px " >
+                            <p:messages id="messages" />
+                            <p:panelGrid columns="2" style="border: 0px" >
+                                <p:outputLabel for="username" value="Username" />
+                                <p:inputText disabled="true" id="username" value="#{customercontroller.user.username}" placeholder="User Name" />     
+                                <p:outputLabel for="firstname" value="First Name" />       
+                                <p:inputText id="firstname" value="#{customercontroller.cust.firstname}" placeholder="First Name" />
+                                <p:outputLabel for="lastname" value="Last Name" />
+                                <p:inputText  id="lastname"  placeholder="Last Name" value="#{customercontroller.cust.lastname}"/>
+                                <p:outputLabel for="phone" value="Phone" />
+                                <p:inputMask id="phone" placeholder="Phone" value="#{customercontroller.cust.phone}" mask="(999) 999-9999"/>
+                                <p:outputLabel for="state" value="State" />
+                                <p:inputText  id="state" placeholder="State" value="#{customercontroller.cust.state}"/>
+                                <p:outputLabel for="city" value="City" />
+                                <p:inputText  id="city"  placeholder="City" value="#{customercontroller.cust.city}"/>
+                                <p:outputLabel for="zip" value="Zip" />
+                                <p:inputText  id="zip"  placeholder="Zip" value="#{customercontroller.cust.zip}"/>
+                                <p:outputLabel for="zip" value="Status" />
+                                <p:inputText id="status"  placeholder="Status" value="#{customercontroller.user.status}" /> 
+                            </p:panelGrid>
+                        </p:panel>
+                        <p:commandButton value="Update" action="#{customercontroller.updateCustomer(customercontroller.cust)}"    ajax="false"  />
+                        <p:commandButton value="logout" action="#{customercontroller.logout()}" ajax="false"  />
+                    </p:layoutUnit>
+                </p:layout>
+            </h:form>
+        </h:body>
+    </f:view>
+
+    <!--    <h:body>
+            you have successfully logged in  # {customercontroller.user.username} 
+            edit
+            <p:inputText  value = "# {customercontroller.user.username}"> </p:inputText>
+            <h:form>
+                <p:commandButton value="logout" action="# {customercontroller.logout()}" ajax="false"  />
+            </h:form>
+        </h:body>-->
+</html>

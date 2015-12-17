@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">  
+
+    <f:view contentType="text/html">
+        <h:head>
+            <title>Login</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        </h:head>
+        <h:body>
+            <h:form>
+                <p:layout fullPage="true" style="height:100%">
+                    <p:layoutUnit position="north" size="100" style="border: 0px">
+                        <h:outputText value="LOGO + name " />
+                    </p:layoutUnit>
+                    <p:layoutUnit position="west" resizable="true" size="150" minSize="40" maxSize="200">
+                        West
+                    </p:layoutUnit>
+                    <p:layoutUnit position="center" >
+                        <p:panel  id="panel" header="Sign Up" style="margin-bottom:10px; border: 0px " >
+                            <p:messages id="messages" />
+                            <p:panelGrid columns="2" style="border: 0px" >
+                                <p:outputLabel for="username" value="Username" />
+                                <p:inputText id="username" required="true" value="#{customercontroller.user.username}" placeholder="Enter Your User Name" />     
+                                <p:outputLabel for="password" value="Password" />
+                                <p:inputText type="password" id="password" required="true" value="#{customercontroller.user.password}" placeholder="Enter Your Password" />     
+                            </p:panelGrid>
+                            <br/>
+                        </p:panel>
+                        <p:commandButton value="Login" action="#{customercontroller.login(customercontroller.user)}" ajax="false"  />
+                    </p:layoutUnit>
+                </p:layout>
+            </h:form>
+        </h:body>
+    </f:view>
+</html>
