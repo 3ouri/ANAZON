@@ -87,7 +87,7 @@ public class ProductController implements Serializable {
         } else {
             searchAll();
         }
-        return "productList?faces-redirect=true";
+        return "index?faces-redirect=true";
     }
 
     public String productDetails() {

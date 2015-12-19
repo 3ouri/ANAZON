@@ -4,7 +4,6 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
-
     <f:view contentType="text/html">
         <h:head>
             <h:outputStylesheet library="css" name="styles.css" />
@@ -13,22 +12,37 @@
                 <title>ANAZON</title>
             </f:facet>
         </h:head>
-
         <h:body>
             <h:form>
-                <p:layout fullPage="true">
+                <p:layout fullPage="true" style="height:100%">
 
-                    <ui:include src="header.xhtml" />
-                    <ui:include src="menu.xhtml" />
+                    <ui:include src="customerHeader.xhtml" />
+                    <ui:include src="customerMenu.xhtml" />
 
-                    <p:layoutUnit position="center" resizable="false">
-                        Welcome
-                    </p:layoutUnit>
+                    <p:layoutUnit position="center">
+                        <p:dataGrid var="product" value="#{productController.productsList}" columns="4"
+                                    rows="12" paginator="true" id="products" paginatorPosition="bottom"
+                                    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                    rowsPerPageTemplate="8,12,16">
 
+                            <!--                            <f:facet name="header">
+                                                            # {productController.headerTitle}
+                                                        </f:facet>-->
+                            <p:panel style="text-align:center">
+                                <p:commandLink id="detailsButton" action="#{productController.productDetails}" style="text-decoration: none;">
+                                    <p:panelGrid columns="1">
+                                        <p:graphicImage width="150" height="150" value="#{product.image}" />   
+                                        <p:outputLabel value="#{product.name}" style="font-weight: bold; cursor: pointer;"/>
+                                        <p:outputLabel value="$#{product.price}" style="font-weight: bold; color: green; font-size: 20px !important; cursor: pointer;"/>
+                                    </p:panelGrid>
+                                    <f:setPropertyActionListener target="#{productController.product}" value="#{product}" />
+                                </p:commandLink>
+                            </p:panel>
+                        </p:dataGrid>
+                    </p:layoutUnit>     
                 </p:layout>
             </h:form>
         </h:body>
-
     </f:view>
 </html>
 

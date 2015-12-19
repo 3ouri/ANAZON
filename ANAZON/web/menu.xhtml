@@ -7,8 +7,6 @@
     <p:layoutUnit position="west" header="Menu" closable="false" collapsible="false">
         <p:menu style="width:182px">
 
-            <p:menuitem action="index?faces-redirect=true" value="Home" immediate="true" />
-
             <p:menuitem action="#{productController.goToProducts}" value="Products Management" ajax="false">
                 <f:setPropertyActionListener target="#{productController}" value="#{null}" />
             </p:menuitem>

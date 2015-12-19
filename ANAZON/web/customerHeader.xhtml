@@ -33,7 +33,9 @@
                     </p:commandButton>
                 </td>
                 <td>
-                    <p:commandButton value="Login" />
+                    <p:commandButton rendered="#{customercontroller.isloged == 0}" value="Login" action="login?faces-redirect=true" />
+                    <p:commandButton rendered="#{customercontroller.isloged == 0}" value="Singup" action="customer?faces-redirect=true" />
+                    <p:commandButton rendered="#{customercontroller.isloged == 1}" value="Logout" action="#{customercontroller.logout()}" />
                 </td>
             </tr>
         </table>

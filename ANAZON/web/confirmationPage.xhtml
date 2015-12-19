@@ -13,7 +13,7 @@
     </h:head>
     <h:body>
         <h:form>
-            <p:layout fullPage="false">
+            <p:layout  fullPage="true" style="height:100%">
 
                 <ui:include src="customerHeader.xhtml" />
                 <ui:include src="customerMenu.xhtml" />
@@ -24,16 +24,16 @@
                             <h1>Customer Information</h1>
                             <p:panelGrid columns="2">
                                 <p:outputLabel value="Name: " />
-                                <p:outputLabel value="#{orderController.customer.firstname} #{orderController.customer.lastname}" />
+                                <p:outputLabel value="#{orderController.order.customreId.firstname} #{orderController.customer.lastname}" />
 
                                 <p:outputLabel value="Phone: " />
-                                <p:outputLabel value="#{orderController.customer.phone}" />
+                                <p:outputLabel value="#{orderController.order.customreId.phone}" />
 
                                 <p:outputLabel value="City: " />
-                                <p:outputLabel value="#{orderController.customer.city}" />
+                                <p:outputLabel value="#{orderController.order.customreId.city}" />
 
                                 <p:outputLabel value="State: " />
-                                <p:outputLabel value="#{orderController.customer.state}" />
+                                <p:outputLabel value="#{orderController.order.customreId.state}" />
                             </p:panelGrid>
 
                             <br />

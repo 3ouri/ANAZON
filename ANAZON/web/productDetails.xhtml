@@ -15,7 +15,7 @@
         <h:body>
             <h:form>
 
-                <p:layout fullPage="false">
+                <p:layout fullPage="true" style="height:100%">
 
                     <ui:include src="customerHeader.xhtml" />
                     <ui:include src="customerMenu.xhtml" />
@@ -50,6 +50,7 @@
                                 <div align="right">
                                     <p:commandButton id="Buy" value="Buy" action="#{productController.goToSubmission}" style="width: 200px; height: 50px;">
                                         <f:setPropertyActionListener target="#{orderController.order.productId}" value="#{productController.product}" />
+                                        <f:setPropertyActionListener target="#{orderController.order.customreId}" value="#{customercontroller.cust}" />
                                     </p:commandButton>
                                 </div>
                             </p:column>

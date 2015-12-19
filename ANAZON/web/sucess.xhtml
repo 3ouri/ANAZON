@@ -10,25 +10,21 @@ and open the template in the editor.
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">   
-    <h:head>
-        <title>My Account</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </h:head>
-
     <f:view contentType="text/html">
         <h:head>
-            <title>My Account</title>
-            <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+            <h:outputStylesheet library="css" name="styles.css" />
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>ANAZON</title>
+            </f:facet>
         </h:head>
         <h:body>
             <h:form>
                 <p:layout fullPage="true" style="height:100%">
-                    <p:layoutUnit position="north" size="100" style="border: 0px">
-                        <h:outputText value="LOGO + name " />
-                    </p:layoutUnit>
-                    <p:layoutUnit position="west" resizable="true" size="150" minSize="40" maxSize="200">
-                        West
-                    </p:layoutUnit>
+
+                    <ui:include src="customerHeader.xhtml" />
+                    <ui:include src="customerMenu.xhtml" />
+
                     <p:layoutUnit position="center" >
                         <p:panel  id="panel" header="My Profile" style="margin-bottom:10px; border: 0px " >
                             <p:messages id="messages" />

@@ -18,7 +18,7 @@ import org.eclipse.persistence.sessions.UnitOfWork;
 public class GeneralDAOImpl {
 
     private static GeneralDAOImpl generalDAO;
-    private static final String persistenceUnitName = "test";
+    private static final String persistenceUnitName = "DataLayer";
     private static EntityManagerFactory factory;
     private JpaEntityManager em;
     private UnitOfWork uow;

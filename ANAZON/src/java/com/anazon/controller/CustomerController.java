@@ -102,7 +102,7 @@ public class CustomerController implements Serializable {
         user.setRoleId(userRole);
         customer.setUserid(user);
         customerService.addCustomer(customer);
-        return "sucess";
+        return "sucess?faces-redirect=true";
     }
 
     public String login(SystemUser u) {
@@ -134,7 +134,7 @@ public class CustomerController implements Serializable {
 //        isloged = false;
         HttpSession session = Util.getSession();
         session.invalidate();
-        return "index";
+        return "index?faces-redirect=true";
     }
 
     public String updateCustomer(Customer c ) {
@@ -193,4 +193,12 @@ public class CustomerController implements Serializable {
 ////        FacesContext.getCurrentInstance().addMessage(null, message);
 ////        context.addCallbackParam("loggedIn", loggedIn);
 //    }
+
+    public int getIsloged() {
+        return isloged;
+    }
+
+    public void setIsloged(int isloged) {
+        this.isloged = isloged;
+    }
 }

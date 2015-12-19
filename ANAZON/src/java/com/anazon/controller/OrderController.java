@@ -140,16 +140,6 @@ public class OrderController implements Serializable {
     }
     
     public String addOrder() {
-        customer.setId(1);
-        customer.setCity("Fairfield");
-        customer.setFirstname("Abdallah");
-        customer.setLastname("Mustafa");
-        customer.setPhone("6412260639");
-        customer.setState("IA");
-        customer.setZip(52557);
-        
-        order.setCustomreId(customer);
-        order.setProductId(product);
         
         paymentInfo.setCreditCardNum(5145);
         paymentInfo.setCvs(234);
@@ -166,7 +156,7 @@ public class OrderController implements Serializable {
         
         orderService.add(order);
         
-        return "productList?faces-redirect=true";
+        return "index?faces-redirect=true";
     }
     
     public Product getProduct() {
